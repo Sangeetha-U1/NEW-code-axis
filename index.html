@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Code Axis — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══════════════ SIDEBAR ══════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <span class="logo-text">Code Axis</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+
+      <div class="nav-item active" onclick="setActive(this); navigateTo('dashboard')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-label">Dashboard</span>
+      </div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('employees')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="nav-label">Employees</span>
+        <span class="nav-badge" id="badgeEmployees">124</span>
+      </div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('projects')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span class="nav-label">Projects</span>
+        <span class="nav-badge">18</span>
+      </div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('tasks')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span class="nav-label">Tasks</span>
+        <span class="nav-badge" id="badgeTasks">47</span>
+      </div>
+
+      <div class="nav-section-label">Tracking</div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('attendance')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="nav-label">Attendance</span>
+      </div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('timelogs')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="nav-label">Time Logs</span>
+      </div>
+
+      <div class="nav-section-label">Analytics</div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('analytics')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="nav-label">Reports</span>
+      </div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('performance')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="nav-label">Performance</span>
+      </div>
+
+      <div class="nav-section-label">System</div>
+
+      <div class="nav-item" onclick="setActive(this); navigateTo('settings')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <span class="nav-label">Settings</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar">SG</div>
+      <div class="user-info">
+        <div class="user-name">Sangeetha</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ MAIN ═══════════════════════ -->
+  <div class="main-wrap" id="mainWrap">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="toggle-btn" id="toggleSidebar" onclick="toggleSidebar()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title" id="topbarTitle">Dashboard</span>
+
+      <div class="search-wrap">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search employees, projects…" oninput="handleSearch(this.value)" />
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="date-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="currentDate">—</span>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="icon-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <!-- Notifications -->
+        <button class="icon-btn notif-btn" onclick="toggleNotifPanel()" title="Notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot" id="notifDot"></span>
+        </button>
+
+        <!-- Settings shortcut -->
+        <button class="icon-btn" onclick="navigateTo('settings'); setActiveByPage('settings')" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </button>
+
+        <div class="profile-chip" onclick="toggleProfileMenu()">
+          <div class="avatar">SG</div>
+          <span>Sangeetha</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div class="profile-menu" id="profileMenu">
+          <div class="profile-menu-header">
+            <div class="avatar" style="width:40px;height:40px;font-size:.9rem;">SG</div>
+            <div>
+              <div style="font-weight:600;font-size:.85rem;">Sangeetha G.</div>
+              <div style="font-size:.72rem;color:var(--text-2);">admin@codeaxis.io</div>
+            </div>
+          </div>
+          <div class="profile-menu-divider"></div>
+          <div class="profile-menu-item" onclick="navigateTo('settings');closeProfileMenu()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            Settings
+          </div>
+          <div class="profile-menu-item" onclick="showToast('Logged out successfully');closeProfileMenu()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sign Out
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notification Panel -->
+    <div class="notif-panel" id="notifPanel">
+      <div class="notif-panel-header">
+        <span class="notif-panel-title">Notifications</span>
+        <button class="notif-clear" onclick="clearNotifications()">Clear all</button>
+      </div>
+      <div class="notif-list" id="notifList"></div>
+    </div>
+
+    <!-- ── PAGE CONTENT ── -->
+    <main class="page" id="pageContent">
+      <!-- Loaded dynamically via JS -->
+    </main>
+
+    <footer class="footer">
+      <span>© 2025 <a href="#">Code Axis</a> — All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- MODAL: Add Employee -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Add New Employee</div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input class="form-input" id="empName" type="text" placeholder="e.g. Ravi Kumar" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" id="empEmail" type="email" placeholder="ravi@codeaxis.io" />
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group">
+        <label class="form-label">Department</label>
+        <select class="form-input" id="empDept">
+          <option>Engineering</option>
+          <option>Design</option>
+          <option>QA</option>
+          <option>DevOps</option>
+          <option>Product</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Role</label>
+        <select class="form-input" id="empRole">
+          <option>Developer</option>
+          <option>Designer</option>
+          <option>Manager</option>
+          <option>Lead</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Join Date</label>
+      <input class="form-input" id="empDate" type="date" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="handleSave()">Add Employee</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+
+
+
+
+
+<script>
+/* ══════════════════════════════════════════
+   CODE AXIS — data.js
+   All mock data used across pages
+══════════════════════════════════════════ */
+
+const DB = {
+
+  /* ── EMPLOYEES ──────────────────────── */
+  employees: [
+    { id: 1,  name: 'Srikant R.',  initials:'SR', dept:'Engineering', role:'Lead Developer',  status:'active',   score:92, joined:'2022-03-15', gradient:'linear-gradient(135deg,#4F46E5,#818CF8)', email:'srikant@codeaxis.io' },
+    { id: 2,  name: 'Priya M.',    initials:'PM', dept:'Design',       role:'UI Designer',     status:'active',   score:88, joined:'2022-07-20', gradient:'linear-gradient(135deg,#0EA5E9,#38BDF8)', email:'priya@codeaxis.io' },
+    { id: 3,  name: 'Arjun K.',    initials:'AK', dept:'Backend',      role:'Developer',       status:'active',   score:79, joined:'2023-01-10', gradient:'linear-gradient(135deg,#22C55E,#4ADE80)', email:'arjun@codeaxis.io' },
+    { id: 4,  name: 'Neha D.',     initials:'ND', dept:'QA',           role:'QA Engineer',     status:'leave',    score:74, joined:'2022-11-08', gradient:'linear-gradient(135deg,#F59E0B,#FCD34D)', email:'neha@codeaxis.io' },
+    { id: 5,  name: 'Vikram R.',   initials:'VR', dept:'DevOps',       role:'DevOps Engineer', status:'active',   score:85, joined:'2021-06-22', gradient:'linear-gradient(135deg,#EF4444,#F87171)', email:'vikram@codeaxis.io' },
+    { id: 6,  name: 'Deepa S.',    initials:'DS', dept:'Product',      role:'Product Manager', status:'active',   score:91, joined:'2021-03-05', gradient:'linear-gradient(135deg,#8B5CF6,#A78BFA)', email:'deepa@codeaxis.io' },
+    { id: 7,  name: 'Rajesh T.',   initials:'RT', dept:'Engineering',  role:'Developer',       status:'inactive', score:65, joined:'2020-09-14', gradient:'linear-gradient(135deg,#F97316,#FB923C)', email:'rajesh@codeaxis.io' },
+    { id: 8,  name: 'Meena P.',    initials:'MP', dept:'Design',       role:'Graphic Designer',status:'active',   score:87, joined:'2023-04-01', gradient:'linear-gradient(135deg,#EC4899,#F472B6)', email:'meena@codeaxis.io' },
+    { id: 9,  name: 'Karthik B.',  initials:'KB', dept:'Backend',      role:'Senior Developer',status:'active',   score:94, joined:'2020-11-30', gradient:'linear-gradient(135deg,#14B8A6,#2DD4BF)', email:'karthik@codeaxis.io' },
+    { id: 10, name: 'Anitha L.',   initials:'AL', dept:'QA',           role:'Test Lead',       status:'active',   score:82, joined:'2022-08-15', gradient:'linear-gradient(135deg,#6366F1,#818CF8)', email:'anitha@codeaxis.io' },
+    { id: 11, name: 'Suresh M.',   initials:'SM', dept:'DevOps',       role:'Cloud Architect', status:'active',   score:89, joined:'2021-12-01', gradient:'linear-gradient(135deg,#0EA5E9,#7DD3FC)', email:'suresh@codeaxis.io' },
+    { id: 12, name: 'Lavanya K.',  initials:'LK', dept:'Product',      role:'Business Analyst',status:'pending',  score:77, joined:'2023-09-10', gradient:'linear-gradient(135deg,#A855F7,#D8B4FE)', email:'lavanya@codeaxis.io' },
+  ],
+
+  /* ── PROJECTS ───────────────────────── */
+  projects: [
+    { id: 1, name:'Axis Portal',   status:'active',   progress:78,  color:'var(--primary)', team:['SR','PM','AK'],    extra:3, deadline:'2025-08-30', desc:'Internal employee portal with HR features.' },
+    { id: 2, name:'CRM System',    status:'review',   progress:95,  color:'var(--sky)',     team:['ND','VR'],          extra:0, deadline:'2025-06-15', desc:'Customer relationship management platform.' },
+    { id: 3, name:'Analytics API', status:'pending',  progress:43,  color:'var(--warning)', team:['AK','SR'],          extra:5, deadline:'2025-09-20', desc:'REST API for real-time analytics reporting.' },
+    { id: 4, name:'Mobile App v2', status:'active',   progress:62,  color:'var(--success)', team:['PM','ND'],          extra:2, deadline:'2025-07-10', desc:'Cross-platform mobile application v2 rebuild.' },
+    { id: 5, name:'Auth Service',  status:'completed',progress:100, color:'var(--success)', team:['KB','SM'],          extra:0, deadline:'2025-04-01', desc:'Unified authentication service with OAuth2.' },
+    { id: 6, name:'Design System', status:'active',   progress:55,  color:'var(--sky)',     team:['MP','DS','PM'],     extra:1, deadline:'2025-10-01', desc:'Company-wide UI component library & tokens.' },
+  ],
+
+  /* ── TASKS ──────────────────────────── */
+  tasks: [
+    { id:1,  title:'Dashboard UI v2',       project:'Axis Portal',   assignee:'SR', priority:'high',   status:'completed', due:'2025-05-01' },
+    { id:2,  title:'API Integration',        project:'CRM System',    assignee:'AK', priority:'high',   status:'in-progress',due:'2025-05-10' },
+    { id:3,  title:'User Auth Flow',         project:'Auth Service',  assignee:'KB', priority:'medium', status:'completed', due:'2025-04-20' },
+    { id:4,  title:'Mobile Navigation',      project:'Mobile App v2', assignee:'PM', priority:'medium', status:'in-progress',due:'2025-05-20' },
+    { id:5,  title:'QA Regression Suite',    project:'Axis Portal',   assignee:'AL', priority:'high',   status:'pending',    due:'2025-05-30' },
+    { id:6,  title:'Cloud Migration Plan',   project:'Analytics API', assignee:'SM', priority:'low',    status:'pending',    due:'2025-06-05' },
+    { id:7,  title:'Token Design Tokens',    project:'Design System', assignee:'MP', priority:'medium', status:'in-progress',due:'2025-05-25' },
+    { id:8,  title:'Performance Audit',      project:'CRM System',    assignee:'VR', priority:'low',    status:'pending',    due:'2025-06-01' },
+    { id:9,  title:'Data Model v3',          project:'Analytics API', assignee:'AK', priority:'high',   status:'in-progress',due:'2025-05-15' },
+    { id:10, title:'Onboarding Flow',        project:'Mobile App v2', assignee:'DS', priority:'medium', status:'pending',    due:'2025-06-10' },
+  ],
+
+  /* ── ATTENDANCE ─────────────────────── */
+  attendance: [
+    { name:'Srikant R.',  initials:'SR', date:'2025-05-08', checkIn:'09:02', checkOut:'18:05', hours:9.05, status:'on-time', gradient:'linear-gradient(135deg,#4F46E5,#818CF8)' },
+    { name:'Priya M.',    initials:'PM', date:'2025-05-08', checkIn:'09:45', checkOut:'18:30', hours:8.75, status:'late',    gradient:'linear-gradient(135deg,#0EA5E9,#38BDF8)' },
+    { name:'Arjun K.',    initials:'AK', date:'2025-05-08', checkIn:'08:55', checkOut:'18:00', hours:9.08, status:'on-time', gradient:'linear-gradient(135deg,#22C55E,#4ADE80)' },
+    { name:'Neha D.',     initials:'ND', date:'2025-05-08', checkIn:'—',     checkOut:'—',     hours:0,    status:'leave',   gradient:'linear-gradient(135deg,#F59E0B,#FCD34D)' },
+    { name:'Vikram R.',   initials:'VR', date:'2025-05-08', checkIn:'09:10', checkOut:'18:15', hours:9.08, status:'on-time', gradient:'linear-gradient(135deg,#EF4444,#F87171)' },
+    { name:'Deepa S.',    initials:'DS', date:'2025-05-08', checkIn:'10:20', checkOut:'19:10', hours:8.83, status:'late',    gradient:'linear-gradient(135deg,#8B5CF6,#A78BFA)' },
+    { name:'Rajesh T.',   initials:'RT', date:'2025-05-08', checkIn:'—',     checkOut:'—',     hours:0,    status:'absent',  gradient:'linear-gradient(135deg,#F97316,#FB923C)' },
+    { name:'Meena P.',    initials:'MP', date:'2025-05-08', checkIn:'08:58', checkOut:'17:58', hours:9.00, status:'on-time', gradient:'linear-gradient(135deg,#EC4899,#F472B6)' },
+    { name:'Karthik B.',  initials:'KB', date:'2025-05-08', checkIn:'09:00', checkOut:'18:00', hours:9.00, status:'on-time', gradient:'linear-gradient(135deg,#14B8A6,#2DD4BF)' },
+    { name:'Anitha L.',   initials:'AL', date:'2025-05-08', checkIn:'09:05', checkOut:'18:10', hours:9.08, status:'on-time', gradient:'linear-gradient(135deg,#6366F1,#818CF8)' },
+  ],
+
+  /* ── TIME LOGS ──────────────────────── */
+  timeLogs: [
+    { name:'Srikant R.',  initials:'SR', project:'Axis Portal',   task:'Dashboard UI v2',   hours:3.5, date:'2025-05-08', gradient:'linear-gradient(135deg,#4F46E5,#818CF8)' },
+    { name:'Priya M.',    initials:'PM', project:'Mobile App v2', task:'Mobile Navigation', hours:2.0, date:'2025-05-08', gradient:'linear-gradient(135deg,#0EA5E9,#38BDF8)' },
+    { name:'Arjun K.',    initials:'AK', project:'Analytics API', task:'Data Model v3',     hours:4.0, date:'2025-05-08', gradient:'linear-gradient(135deg,#22C55E,#4ADE80)' },
+    { name:'Vikram R.',   initials:'VR', project:'CRM System',    task:'Performance Audit', hours:1.5, date:'2025-05-08', gradient:'linear-gradient(135deg,#EF4444,#F87171)' },
+    { name:'Meena P.',    initials:'MP', project:'Design System',  task:'Token Design Tokens',hours:3.0,date:'2025-05-08', gradient:'linear-gradient(135deg,#EC4899,#F472B6)' },
+    { name:'Karthik B.',  initials:'KB', project:'Auth Service',  task:'OAuth Review',      hours:2.5, date:'2025-05-08', gradient:'linear-gradient(135deg,#14B8A6,#2DD4BF)' },
+    { name:'Deepa S.',    initials:'DS', project:'Axis Portal',   task:'Product Roadmap',   hours:2.0, date:'2025-05-08', gradient:'linear-gradient(135deg,#8B5CF6,#A78BFA)' },
+    { name:'Suresh M.',   initials:'SM', project:'Analytics API', task:'Cloud Migration',   hours:3.5, date:'2025-05-07', gradient:'linear-gradient(135deg,#0EA5E9,#7DD3FC)' },
+  ],
+
+  /* ── NOTIFICATIONS ──────────────────── */
+  notifications: [
+    { id:1,  text:'Srikant R. completed "Dashboard UI v2"',          time:'2 min ago',  type:'success', unread:true },
+    { id:2,  text:'Project Axis Portal moved to Review stage',        time:'15 min ago', type:'info',    unread:true },
+    { id:3,  text:'Priya M. joined the Design team',                 time:'1 hr ago',   type:'user',    unread:true },
+    { id:4,  text:'"API Integration" task deadline approaching',       time:'2 hr ago',   type:'warning', unread:false },
+    { id:5,  text:'Neha D. marked attendance as On Leave',            time:'3 hr ago',   type:'info',    unread:false },
+    { id:6,  text:'Monthly report generated for May 2025',            time:'5 hr ago',   type:'report',  unread:false },
+  ],
+
+  /* ── PERFORMANCE CHART DATA ─────────── */
+  performance: {
+    2025: [72,78,75,82,88,84,90,87,92,89,94,91],
+    2024: [60,65,68,70,73,71,76,79,74,80,78,83],
+  },
+
+  /* ── SEARCH INDEX ───────────────────── */
+  searchIndex: [
+    { label:'Dashboard',     type:'Page',     page:'dashboard' },
+    { label:'Employees',     type:'Page',     page:'employees' },
+    { label:'Projects',      type:'Page',     page:'projects' },
+    { label:'Tasks',         type:'Page',     page:'tasks' },
+    { label:'Attendance',    type:'Page',     page:'attendance' },
+    { label:'Time Logs',     type:'Page',     page:'timelogs' },
+    { label:'Reports',       type:'Page',     page:'analytics' },
+    { label:'Performance',   type:'Page',     page:'performance' },
+    { label:'Settings',      type:'Page',     page:'settings' },
+    { label:'Srikant R.',    type:'Employee', page:'employees' },
+    { label:'Priya M.',      type:'Employee', page:'employees' },
+    { label:'Arjun K.',      type:'Employee', page:'employees' },
+    { label:'Axis Portal',   type:'Project',  page:'projects' },
+    { label:'CRM System',    type:'Project',  page:'projects' },
+    { label:'Analytics API', type:'Project',  page:'projects' },
+  ],
+};
+/* ══════════════════════════════════════════
+   CODE AXIS — theme.js
+   Dark / Light mode logic
+══════════════════════════════════════════ */
+
+const ThemeManager = (() => {
+  const STORAGE_KEY = 'ca-theme';
+
+  function getTheme() {
+    return localStorage.getItem(STORAGE_KEY) ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+    // Update chart colors if charts are initialised
+    if (window.ChartsManager) ChartsManager.updateTheme(theme);
+  }
+
+  function toggle() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next    = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    showToast(next === 'dark' ? '🌙 Dark mode enabled' : '☀️ Light mode enabled');
+  }
+
+  function init() {
+    applyTheme(getTheme());
+  }
+
+  return { init, toggle, getTheme, applyTheme };
+})();
+
+function toggleTheme() {
+  ThemeManager.toggle();
+}
+/* ══════════════════════════════════════════
+   CODE AXIS — charts.js
+   Chart.js chart instances + theme update
+══════════════════════════════════════════ */
+
+const ChartsManager = (() => {
+  let lineChart = null;
+  let donutChart = null;
+  let barChart = null;
+  let radarChart = null;
+  let areaChart = null;
+
+  function getGridColor() {
+    return document.documentElement.getAttribute('data-theme') === 'dark'
+      ? 'rgba(255,255,255,.06)'
+      : 'rgba(0,0,0,.04)';
+  }
+  function getTextColor() {
+    return document.documentElement.getAttribute('data-theme') === 'dark'
+      ? '#555D7A'
+      : '#9CA3AF';
+  }
+
+  function applyDefaults() {
+    Chart.defaults.font.family = "'Poppins', sans-serif";
+    Chart.defaults.font.size   = 11;
+    Chart.defaults.color       = getTextColor();
+  }
+
+  /* ── LINE CHART ─────────────────────── */
+  function initLineChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    const grad = ctx.getContext('2d').createLinearGradient(0, 0, 0, 220);
+    grad.addColorStop(0, 'rgba(79,70,229,.3)');
+    grad.addColorStop(1, 'rgba(79,70,229,.0)');
+
+    if (lineChart) lineChart.destroy();
+    lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+          label: 'Avg Score',
+          data: DB.performance[2025],
+          borderColor: '#4F46E5',
+          backgroundColor: grad,
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#4F46E5',
+          tension: .42,
+          fill: true,
+        }, {
+          label: 'Target',
+          data: Array(12).fill(85),
+          borderColor: isDark ? 'rgba(255,255,255,.15)' : '#E5E7EB',
+          borderDash: [5, 4],
+          borderWidth: 1.5,
+          pointRadius: 0,
+          fill: false,
+          tension: 0
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: isDark ? '#21253A' : '#111827',
+            titleColor: isDark ? '#8B91A8' : '#9CA3AF',
+            bodyColor: '#fff',
+            padding: 10, cornerRadius: 8, displayColors: false,
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { color: getTextColor() } },
+          y: { grid: { color: getGridColor() }, border: { display: false }, ticks: { stepSize: 10, color: getTextColor() } }
+        }
+      }
+    });
+    return lineChart;
+  }
+
+  /* ── DONUT CHART ────────────────────── */
+  function initDonutChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (donutChart) donutChart.destroy();
+    donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Present', 'Late', 'Absent'],
+        datasets: [{
+          data: [94, 3, 3],
+          backgroundColor: ['#4F46E5', '#F59E0B', '#EF4444'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '72%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: c => ` ${c.label}: ${c.raw}%` } }
+        }
+      }
+    });
+    return donutChart;
+  }
+
+  /* ── BAR CHART ──────────────────────── */
+  function initBarChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (barChart) barChart.destroy();
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    const gComp  = ctx.getContext('2d').createLinearGradient(0,0,0,180);
+    gComp.addColorStop(0,'#4F46E5'); gComp.addColorStop(1,'#818CF8');
+    const gInProg = ctx.getContext('2d').createLinearGradient(0,0,0,180);
+    gInProg.addColorStop(0,'#0EA5E9'); gInProg.addColorStop(1,'#38BDF8');
+
+    barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+          label: 'Completed',
+          data: [4,6,5,7,8,6],
+          backgroundColor: gComp,
+          borderRadius: 6, borderSkipped: false,
+        }, {
+          label: 'In Progress',
+          data: [3,2,4,3,2,5],
+          backgroundColor: gInProg,
+          borderRadius: 6, borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'top', labels: { boxWidth: 10, borderRadius: 3, padding: 14, font: { size: 11 }, color: getTextColor() } },
+          tooltip: { backgroundColor: isDark ? '#21253A' : '#111827', cornerRadius: 8 }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { color: getTextColor() } },
+          y: { grid: { color: getGridColor() }, border: { display: false }, ticks: { stepSize: 2, color: getTextColor() } }
+        }
+      }
+    });
+    return barChart;
+  }
+
+  /* ── RADAR CHART (Performance page) ── */
+  function initRadarChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (radarChart) radarChart.destroy();
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    radarChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Engineering','Design','QA','DevOps','Product','Backend'],
+        datasets: [{
+          label: 'Team Score',
+          data: [88,92,74,85,91,79],
+          backgroundColor: 'rgba(79,70,229,.2)',
+          borderColor: '#4F46E5',
+          borderWidth: 2,
+          pointBackgroundColor: '#4F46E5',
+          pointRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+          r: {
+            beginAtZero: true, max: 100, ticks: { stepSize: 20, color: getTextColor(), backdropColor: 'transparent' },
+            grid: { color: getGridColor() },
+            angleLines: { color: getGridColor() },
+            pointLabels: { color: getTextColor(), font: { size: 11 } }
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+    return radarChart;
+  }
+
+  /* ── AREA CHART (Analytics page) ───── */
+  function initAreaChart(canvasId) {
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+    if (areaChart) areaChart.destroy();
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    const grad1 = ctx.getContext('2d').createLinearGradient(0,0,0,200);
+    grad1.addColorStop(0,'rgba(79,70,229,.35)'); grad1.addColorStop(1,'rgba(79,70,229,.0)');
+    const grad2 = ctx.getContext('2d').createLinearGradient(0,0,0,200);
+    grad2.addColorStop(0,'rgba(14,165,233,.35)'); grad2.addColorStop(1,'rgba(14,165,233,.0)');
+
+    areaChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [{
+          label: '2025',
+          data: [72,78,75,82,88,84,90,87,92,89,94,91],
+          borderColor: '#4F46E5', backgroundColor: grad1, borderWidth: 2.5,
+          tension: .42, fill: true, pointRadius: 0, pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#4F46E5',
+        }, {
+          label: '2024',
+          data: [60,65,68,70,73,71,76,79,74,80,78,83],
+          borderColor: '#0EA5E9', backgroundColor: grad2, borderWidth: 2,
+          tension: .42, fill: true, pointRadius: 0, pointHoverRadius: 5,
+          pointHoverBackgroundColor: '#0EA5E9',
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: true, position: 'top', labels: { color: getTextColor(), boxWidth: 10, padding: 14 } },
+          tooltip: { backgroundColor: isDark ? '#21253A' : '#111827', cornerRadius: 8 }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { color: getTextColor() } },
+          y: { grid: { color: getGridColor() }, border: { display: false }, ticks: { stepSize: 10, color: getTextColor() } }
+        }
+      }
+    });
+    return areaChart;
+  }
+
+  /* ── UPDATE YEAR (Line chart) ───────── */
+  function updateLineYear(year) {
+    if (!lineChart) return;
+    lineChart.data.datasets[0].data = DB.performance[year];
+    lineChart.update();
+  }
+
+  /* ── THEME UPDATE ───────────────────── */
+  function updateTheme(theme) {
+    Chart.defaults.color = getTextColor();
+    [lineChart, donutChart, barChart, radarChart, areaChart].forEach(c => {
+      if (!c) return;
+      c.options.scales && Object.values(c.options.scales).forEach(s => {
+        if (s.grid) s.grid.color = getGridColor();
+        if (s.ticks) s.ticks.color = getTextColor();
+        if (s.pointLabels) s.pointLabels.color = getTextColor();
+        if (s.angleLines) s.angleLines.color = getGridColor();
+      });
+      if (c.options.plugins?.legend?.labels) {
+        c.options.plugins.legend.labels.color = getTextColor();
+      }
+      c.update();
+    });
+  }
+
+  return { initLineChart, initDonutChart, initBarChart, initRadarChart, initAreaChart, updateLineYear, updateTheme, applyDefaults };
+})();
+
+function updateLineChart(year) {
+  ChartsManager.updateLineYear(year);
+}
+/* ══════════════════════════════════════════
+   CODE AXIS — ui.js
+   Sidebar, Modal, Toast, Search, Notifications
+══════════════════════════════════════════ */
+
+/* ── SIDEBAR ─────────────────────────── */
+let sidebarCollapsed = false;
+
+function toggleSidebar() {
+  sidebarCollapsed = !sidebarCollapsed;
+  const sidebar   = document.getElementById('sidebar');
+  const mainWrap  = document.getElementById('mainWrap');
+
+  if (window.innerWidth <= 640) {
+    sidebar.classList.toggle('mobile-open');
+    sidebarCollapsed = false; // don't collapse on mobile, just show/hide
+    mainWrap.classList.remove('collapsed');
+  } else {
+    sidebar.classList.toggle('collapsed', sidebarCollapsed);
+    mainWrap.classList.toggle('collapsed', sidebarCollapsed);
+  }
+}
+
+/* ── ACTIVE NAV ─────────────────────── */
+function setActive(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function setActiveByPage(page) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(`'${page}'`)) {
+      n.classList.add('active');
+    }
+  });
+}
+
+/* ── TOPBAR TITLE ───────────────────── */
+function setTopbarTitle(title) {
+  document.getElementById('topbarTitle').textContent = title;
+}
+
+/* ── TOAST ──────────────────────────── */
+let toastTimer;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = type ? `show ${type}` : 'show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = '', 2800);
+}
+
+/* ── MODAL ──────────────────────────── */
+function openModal(title = 'Add New Employee') {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  // Reset form
+  ['empName','empEmail','empDate'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+function handleOverlayClick(e) {
+  if (e.target === e.currentTarget) closeModal();
+}
+function handleSave() {
+  const name  = document.getElementById('empName').value.trim();
+  const email = document.getElementById('empEmail').value.trim();
+  const dept  = document.getElementById('empDept').value;
+  const role  = document.getElementById('empRole').value;
+  const date  = document.getElementById('empDate').value;
+
+  if (!name || !email) {
+    showToast('Please fill in Name and Email', 'warning');
+    return;
+  }
+
+  // Add to data store
+  const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+  const gradients = [
+    'linear-gradient(135deg,#4F46E5,#818CF8)',
+    'linear-gradient(135deg,#0EA5E9,#38BDF8)',
+    'linear-gradient(135deg,#22C55E,#4ADE80)',
+    'linear-gradient(135deg,#EC4899,#F472B6)',
+    'linear-gradient(135deg,#8B5CF6,#A78BFA)',
+    'linear-gradient(135deg,#14B8A6,#2DD4BF)',
+  ];
+  const g = gradients[Math.floor(Math.random() * gradients.length)];
+
+  DB.employees.push({
+    id:       DB.employees.length + 1,
+    name, initials, dept, role,
+    status:   'active',
+    score:    Math.floor(60 + Math.random() * 35),
+    joined:   date || new Date().toISOString().split('T')[0],
+    gradient: g,
+    email
+  });
+
+  // Update badge
+  document.getElementById('badgeEmployees').textContent = DB.employees.length;
+
+  closeModal();
+  showToast(`${name} added successfully ✓`, 'success');
+
+  // Refresh employee page if active
+  if (window.currentPage === 'employees') navigateTo('employees');
+  if (window.currentPage === 'dashboard') navigateTo('dashboard');
+}
+
+/* ── PROFILE MENU ───────────────────── */
+function toggleProfileMenu() {
+  const menu = document.getElementById('profileMenu');
+  menu.classList.toggle('open');
+}
+function closeProfileMenu() {
+  document.getElementById('profileMenu').classList.remove('open');
+}
+
+/* Close on outside click */
+document.addEventListener('click', function(e) {
+  const menu  = document.getElementById('profileMenu');
+  const chip  = document.querySelector('.profile-chip');
+  if (menu && !menu.contains(e.target) && chip && !chip.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+  const notif = document.getElementById('notifPanel');
+  const btn   = document.querySelector('.notif-btn');
+  if (notif && !notif.contains(e.target) && btn && !btn.contains(e.target)) {
+    notif.classList.remove('open');
+  }
+  const drop  = document.getElementById('searchDropdown');
+  const sWrap = document.querySelector('.search-wrap');
+  if (drop && !sWrap.contains(e.target)) {
+    drop.classList.remove('show');
+  }
+});
+
+/* ── NOTIFICATIONS ──────────────────── */
+function renderNotifications() {
+  const list    = document.getElementById('notifList');
+  const dot     = document.getElementById('notifDot');
+  const unread  = DB.notifications.filter(n => n.unread);
+  dot.classList.toggle('hidden', unread.length === 0);
+
+  const icons = {
+    success: { bg:'var(--success-dim)', color:'var(--success)', svg:`<path d="M9 11l3 3L22 4"/>` },
+    info:    { bg:'var(--sky-dim)',     color:'var(--sky)',     svg:`<rect x="2" y="7" width="20" height="14" rx="2"/>` },
+    user:    { bg:'var(--primary-dim)', color:'var(--primary)', svg:`<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>` },
+    warning: { bg:'var(--warning-dim)', color:'var(--warning)', svg:`<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>` },
+    report:  { bg:'var(--primary-dim)', color:'var(--primary)', svg:`<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>` },
+  };
+
+  list.innerHTML = DB.notifications.map(n => {
+    const ic = icons[n.type] || icons.info;
+    return `
+      <div class="notif-item${n.unread ? ' unread' : ''}" onclick="markRead(${n.id})">
+        <div class="notif-icon" style="background:${ic.bg};color:${ic.color}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">${ic.svg}</svg>
+        </div>
+        <div class="notif-body">
+          <div class="notif-text">${n.text}</div>
+          <div class="notif-time">${n.time}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function markRead(id) {
+  const notif = DB.notifications.find(n => n.id === id);
+  if (notif) notif.unread = false;
+  renderNotifications();
+}
+
+function clearNotifications() {
+  DB.notifications.forEach(n => n.unread = false);
+  renderNotifications();
+  showToast('All notifications cleared');
+}
+
+function toggleNotifPanel() {
+  document.getElementById('notifPanel').classList.toggle('open');
+  renderNotifications();
+}
+
+/* ── SEARCH ─────────────────────────── */
+function handleSearch(q) {
+  const drop = document.getElementById('searchDropdown');
+  if (!q.trim()) { drop.classList.remove('show'); return; }
+
+  const results = DB.searchIndex.filter(item =>
+    item.label.toLowerCase().includes(q.toLowerCase())
+  ).slice(0, 7);
+
+  if (!results.length) { drop.classList.remove('show'); return; }
+
+  const tagColors = {
+    Page:     'background:var(--primary-dim);color:var(--primary)',
+    Employee: 'background:var(--success-dim);color:#15803D',
+    Project:  'background:var(--sky-dim);color:#0369A1',
+  };
+
+  drop.innerHTML = results.map(r => `
+    <div class="search-result-item" onclick="navigateTo('${r.page}');setActiveByPage('${r.page}');document.getElementById('searchInput').value='';document.getElementById('searchDropdown').classList.remove('show')">
+      <span>${r.label}</span>
+      <span class="result-tag" style="${tagColors[r.type] || ''}">${r.type}</span>
+    </div>`).join('');
+  drop.classList.add('show');
+}
+
+/* ── DATE ───────────────────────────── */
+function initDate() {
+  const d = new Date();
+  document.getElementById('currentDate').textContent =
+    d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+}
+
+/* ── COUNT-UP ───────────────────────── */
+function countUp(el, target, suffix = '', duration = 1200) {
+  let start = null;
+  const step = ts => {
+    if (!start) start = ts;
+    const prog = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - prog, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (prog < 1) requestAnimationFrame(step);
+  };
+  setTimeout(() => requestAnimationFrame(step), 300);
+}
+
+/* ── SCORE RING ─────────────────────── */
+function animateScoreRing(arcId, valId, target) {
+  const circ = 326.73;
+  const arc  = document.getElementById(arcId);
+  const valEl= document.getElementById(valId);
+  if (!arc || !valEl) return;
+  arc.style.strokeDashoffset = circ * (1 - target / 100);
+  let n = 0;
+  const tick = setInterval(() => {
+    n++;
+    valEl.textContent = n;
+    if (n >= target) clearInterval(tick);
+  }, 1200 / target);
+}
+/* ══════════════════════════════════════════
+   CODE AXIS — pages.js
+   Renders each page's HTML content
+══════════════════════════════════════════ */
+
+/* ────────────────────────────────────────
+   HELPERS
+──────────────────────────────────────── */
+function statusBadge(s) {
+  const map = { active:'active', pending:'pending', completed:'completed', inactive:'inactive', review:'completed', leave:'leave', 'in-progress':'pending', 'on-time':'active', late:'pending', absent:'inactive' };
+  const cls = map[s] || 'pending';
+  return `<span class="badge ${cls}"><span class="badge-dot"></span>${s.charAt(0).toUpperCase()+s.slice(1)}</span>`;
+}
+function timeBadge(s) {
+  return `<span class="time-badge ${s}">${s.charAt(0).toUpperCase()+s.slice(1).replace('-',' ')}</span>`;
+}
+function priorityBadge(p) {
+  const map = { high:'badge inactive', medium:'badge pending', low:'badge completed' };
+  return `<span class="${map[p]||'badge pending'}"><span class="badge-dot"></span>${p.charAt(0).toUpperCase()+p.slice(1)}</span>`;
+}
+function gradientAvatar(initials, gradient, size=32, fontSize='.73rem') {
+  return `<div class="emp-avatar" style="width:${size}px;height:${size}px;font-size:${fontSize};background:${gradient}">${initials}</div>`;
+}
+function actIcon(bg, color, svgPath) {
+  return `<div class="act-icon" style="background:${bg};color:${color}">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">${svgPath}</svg>
+  </div>`;
+}
+const ACTIVITIES = [
+  { text:'<strong>Srikant R.</strong> completed task "Dashboard UI v2"', time:'2 min ago',  type:'success' },
+  { text:'Project <strong>Axis Portal</strong> moved to Review stage',   time:'15 min ago', type:'info'    },
+  { text:'<strong>Priya M.</strong> joined the Design team',             time:'1 hr ago',   type:'user'    },
+  { text:'Task <strong>"API Integration"</strong> deadline approaching', time:'2 hr ago',   type:'warning' },
+  { text:'<strong>Neha D.</strong> marked attendance as On Leave',       time:'3 hr ago',   type:'info'    },
+  { text:'Monthly report generated for <strong>May 2025</strong>',      time:'5 hr ago',   type:'report'  },
+];
+const ACT_ICONS = {
+  success:{ bg:'var(--primary-dim)', color:'var(--primary)', svg:`<path d="M9 11l3 3L22 4"/>` },
+  info:   { bg:'var(--sky-dim)',     color:'var(--sky)',     svg:`<rect x="2" y="7" width="20" height="14" rx="2"/>` },
+  user:   { bg:'var(--success-dim)', color:'var(--success)', svg:`<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>` },
+  warning:{ bg:'var(--warning-dim)', color:'var(--warning)', svg:`<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>` },
+  report: { bg:'var(--primary-dim)', color:'var(--primary)', svg:`<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>` },
+};
+
+/* ════════════════════════════════════════
+   DASHBOARD PAGE
+════════════════════════════════════════ */
+function renderDashboard() {
+  setTopbarTitle('Dashboard');
+  const page = document.getElementById('pageContent');
+  page.innerHTML = `
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">Overview</div>
+        <div class="page-subtitle">Welcome back, Sangeetha — here's what's happening today.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="showToast('Exporting report…')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export
+        </button>
+        <button class="btn btn-primary" onclick="openModal('Add New Employee')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Employee
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      ${[
+        { cls:'indigo', svg:`<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`, trend:'up', tval:'↑ 4.2%', count:DB.employees.length, label:'Total Employees', suffix:'' },
+        { cls:'green',  svg:`<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`, trend:'up', tval:'↑ 2', count:DB.projects.length, label:'Active Projects', suffix:'' },
+        { cls:'sky',    svg:`<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>`, trend:'up', tval:'↑ 12%', count:342, label:'Completed Tasks', suffix:'' },
+        { cls:'amber',  svg:`<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`, trend:'down', tval:'↓ 5', count:DB.tasks.filter(t=>t.status==='pending'||t.status==='in-progress').length, label:'Pending Tasks', suffix:'' },
+        { cls:'red',    svg:`<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`, trend:'up', tval:'↑ 1.8%', count:94, label:'Attendance Rate', suffix:'%' },
+      ].map((k,i) => `
+        <div class="kpi-card ${k.cls}">
+          <div class="kpi-top">
+            <div class="kpi-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${k.svg}</svg></div>
+            <span class="kpi-trend trend-${k.trend}">${k.tval}</span>
+          </div>
+          <div class="kpi-value" id="kpiVal${i}" data-count="${k.count}" data-suffix="${k.suffix}">0</div>
+          <div class="kpi-label">${k.label}</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="charts-row">
+      <div class="card slide-up" style="animation-delay:.3s">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Employee Performance Trend</div>
+            <div class="card-subtitle">Monthly avg. score across all departments</div>
+          </div>
+          <div class="card-actions">
+            <select class="pill-select" onchange="updateLineChart(this.value)">
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-wrap" style="height:220px;"><canvas id="lineChart"></canvas></div>
+        </div>
+      </div>
+      <div class="card slide-up" style="animation-delay:.35s">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Attendance Summary</div>
+            <div class="card-subtitle">This month</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;justify-content:center;">
+            <div class="chart-wrap" style="height:170px;width:170px;"><canvas id="donutChart"></canvas></div>
+          </div>
+          <div class="donut-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#4F46E5"></span><span class="legend-label">Present</span><span class="legend-val">94%</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#F59E0B"></span><span class="legend-label">Late</span><span class="legend-val">3%</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background:#EF4444"></span><span class="legend-label">Absent</span><span class="legend-val">3%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="charts-row-3">
+      <div class="card slide-up" style="animation-delay:.4s">
+        <div class="card-header"><div><div class="card-title">Project Progress</div><div class="card-subtitle">Completed vs In-Progress</div></div></div>
+        <div class="card-body"><div class="chart-wrap" style="height:180px;"><canvas id="barChart"></canvas></div></div>
+      </div>
+      <div class="card slide-up" style="animation-delay:.45s">
+        <div class="card-header"><div><div class="card-title">Task Completion</div><div class="card-subtitle">By department</div></div></div>
+        <div class="card-body">
+          <div class="progress-bar-wrap">
+            ${[['Frontend',88,'var(--primary)'],['Backend',74,'var(--success)'],['Design',92,'var(--sky)'],['QA',61,'var(--warning)'],['DevOps',55,'var(--danger)']].map(([name,pct,color])=>`
+              <div class="progress-item">
+                <div class="progress-label"><span class="progress-name">${name}</span><span class="progress-pct" style="color:${color}">${pct}%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="card slide-up" style="animation-delay:.5s">
+        <div class="card-header"><div><div class="card-title">Overall Score</div><div class="card-subtitle">Company health index</div></div></div>
+        <div class="card-body">
+          <div class="score-wrap">
+            <div class="score-ring">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="10"/>
+                <circle id="scoreArc" cx="60" cy="60" r="52" fill="none" stroke="#4F46E5" stroke-width="10"
+                  stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round"
+                  style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)"/>
+              </svg>
+              <div class="score-center"><div class="score-val" id="scoreVal">0</div><div class="score-lbl">/ 100</div></div>
+            </div>
+            <div class="mini-stats">
+              <div class="mini-stat"><div class="mini-stat-val" style="color:var(--success)">87</div><div class="mini-stat-lbl">Avg Score</div></div>
+              <div class="mini-stat"><div class="mini-stat-val" style="color:var(--primary)">${DB.employees.filter(e=>e.status==='active').length}</div><div class="mini-stat-lbl">Active</div></div>
+              <div class="mini-stat"><div class="mini-stat-val" style="color:var(--sky)">${DB.projects.filter(p=>p.status==='active').length}</div><div class="mini-stat-lbl">Projects</div></div>
+              <div class="mini-stat"><div class="mini-stat-val" style="color:var(--warning)">${DB.tasks.filter(t=>t.status==='pending').length}</div><div class="mini-stat-lbl">Pending</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: Table + Activity -->
+    <div class="bottom-grid">
+      <div class="card slide-up" style="animation-delay:.55s">
+        <div class="card-header">
+          <div><div class="card-title">Top Employees</div><div class="card-subtitle">Performance leaders this month</div></div>
+          <button class="btn btn-ghost btn-sm" onclick="navigateTo('employees');setActiveByPage('employees')">View all</button>
+        </div>
+        <div class="card-body" style="padding-top:8px;">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Employee</th><th>Dept</th><th>Status</th><th>Score</th></tr></thead>
+              <tbody>
+                ${[...DB.employees].sort((a,b)=>b.score-a.score).slice(0,6).map(e=>`
+                  <tr>
+                    <td><div class="emp-cell">${gradientAvatar(e.initials,e.gradient)}<div><div class="emp-name">${e.name}</div><div class="emp-dept">${e.role}</div></div></div></td>
+                    <td>${e.dept}</td>
+                    <td>${statusBadge(e.status)}</td>
+                    <td><strong style="color:var(--primary)">${e.score}</strong></td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card slide-up" style="animation-delay:.6s">
+        <div class="card-header">
+          <div><div class="card-title">Activity Feed</div><div class="card-subtitle">Recent platform events</div></div>
+          <span class="badge active"><span class="badge-dot" style="animation:pulse 1.5s infinite"></span>Live</span>
+        </div>
+        <div class="card-body" style="padding-top:10px;">
+          <div class="activity-list">
+            ${ACTIVITIES.map(a=>{
+              const ic = ACT_ICONS[a.type]||ACT_ICONS.info;
+              return `<div class="activity-item">
+                ${actIcon(ic.bg,ic.color,ic.svg)}
+                <div class="act-body"><div class="act-text">${a.text}</div><div class="act-time">${a.time}</div></div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Projects -->
+    <div class="section-label">Active Projects</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:24px;">
+      ${DB.projects.map((p,i)=>`
+        <div class="card slide-up" style="animation-delay:${.65+i*.03}s;">
+          <div class="card-body" style="padding:18px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <div style="font-weight:700;font-size:.88rem;">${p.name}</div>
+              ${statusBadge(p.status)}
+            </div>
+            <div class="progress-label"><span class="progress-name" style="font-size:.76rem;color:var(--text-2)">Progress</span><span class="progress-pct" style="color:${p.color}">${p.progress}%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:${p.progress}%;background:${p.color}"></div></div>
+            <div class="avatar-stack">
+              ${p.team.map(t=>`<div class="emp-avatar" style="width:26px;height:26px;font-size:.63rem;background:${DB.employees.find(e=>e.initials===t)?.gradient||'var(--border)'}">${t}</div>`).join('')}
+              ${p.extra>0?`<div class="avatar-extra">+${p.extra}</div>`:''}
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  // Animate KPI
+  document.querySelectorAll('.kpi-value[data-count]').forEach(el => {
+    countUp(el, parseInt(el.dataset.count), el.dataset.suffix || '');
+  });
+
+  // Charts
+  ChartsManager.applyDefaults();
+  requestAnimationFrame(() => {
+    ChartsManager.initLineChart('lineChart');
+    ChartsManager.initDonutChart('donutChart');
+    ChartsManager.initBarChart('barChart');
+    setTimeout(() => animateScoreRing('scoreArc','scoreVal',87), 500);
+  });
+}
+
+/* ════════════════════════════════════════
+   EMPLOYEES PAGE
+════════════════════════════════════════ */
+function renderEmployees(filter='', dept='all') {
+  setTopbarTitle('Employees');
+  let list = DB.employees.filter(e =>
+    (dept === 'all' || e.dept === dept) &&
+    (e.name.toLowerCase().includes(filter.toLowerCase()) || e.dept.toLowerCase().includes(filter.toLowerCase()))
+  );
+
+  const depts = ['all', ...new Set(DB.employees.map(e=>e.dept))];
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Employees <span style="font-size:1rem;color:var(--text-2);font-weight:500">(${list.length})</span></div>
+        <div class="page-subtitle">Manage your team members and their details.</div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal('Add New Employee')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Employee
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="table-actions">
+          <div class="search-inline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search employees…" value="${filter}" oninput="renderEmployees(this.value, document.getElementById('empDeptFilter').value)" />
+          </div>
+          <select id="empDeptFilter" class="filter-select" onchange="renderEmployees(document.querySelector('.search-inline input').value, this.value)">
+            ${depts.map(d=>`<option value="${d}" ${d===dept?'selected':''}>${d==='all'?'All Depts':d}</option>`).join('')}
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('Exporting employee list…')">Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Department</th><th>Role</th><th>Status</th><th>Score</th><th>Joined</th><th>Actions</th></tr></thead>
+            <tbody>
+              ${list.length ? list.map(e=>`
+                <tr>
+                  <td><div class="emp-cell">${gradientAvatar(e.initials,e.gradient)}<div><div class="emp-name">${e.name}</div><div class="emp-dept">${e.email}</div></div></div></td>
+                  <td>${e.dept}</td>
+                  <td>${e.role}</td>
+                  <td>${statusBadge(e.status)}</td>
+                  <td><div style="display:flex;align-items:center;gap:6px;"><div style="width:60px;background:var(--bg);border-radius:99px;height:5px;overflow:hidden;"><div style="width:${e.score}%;height:100%;background:var(--primary);border-radius:99px;"></div></div><strong>${e.score}</strong></div></td>
+                  <td style="color:var(--text-2)">${e.joined}</td>
+                  <td><div class="action-row">
+                    <button class="act-btn view" title="View" onclick="showToast('Viewing ${e.name}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                    <button class="act-btn edit" title="Edit" onclick="showToast('Editing ${e.name}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="act-btn del" title="Delete" onclick="deleteEmployee(${e.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>
+                  </div></td>
+                </tr>`).join('')
+              : `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text-3)">No employees found.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function deleteEmployee(id) {
+  const idx = DB.employees.findIndex(e => e.id === id);
+  if (idx !== -1) {
+    const name = DB.employees[idx].name;
+    DB.employees.splice(idx, 1);
+    document.getElementById('badgeEmployees').textContent = DB.employees.length;
+    showToast(`${name} removed`, 'error');
+    renderEmployees();
+  }
+}
+
+/* ════════════════════════════════════════
+   PROJECTS PAGE
+════════════════════════════════════════ */
+function renderProjects() {
+  setTopbarTitle('Projects');
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Projects</div>
+        <div class="page-subtitle">Track ongoing and completed projects.</div>
+      </div>
+      <button class="btn btn-primary" onclick="showToast('New project dialog coming soon')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        New Project
+      </button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;">
+      ${DB.projects.map(p=>`
+        <div class="card" style="transition:transform .2s;cursor:pointer" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform=''">
+          <div class="card-body" style="padding:22px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+              <div style="font-weight:700;font-size:.95rem;">${p.name}</div>
+              ${statusBadge(p.status)}
+            </div>
+            <div style="font-size:.78rem;color:var(--text-2);margin-bottom:14px;line-height:1.5;">${p.desc}</div>
+            <div class="progress-label"><span class="progress-name" style="font-size:.78rem;">Progress</span><span class="progress-pct" style="color:${p.color}">${p.progress}%</span></div>
+            <div class="progress-track" style="margin-bottom:14px;"><div class="progress-fill" style="width:${p.progress}%;background:${p.color}"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div class="avatar-stack">
+                ${p.team.map(t=>`<div class="emp-avatar" style="width:28px;height:28px;font-size:.68rem;background:${DB.employees.find(e=>e.initials===t)?.gradient||'var(--border)'}">${t}</div>`).join('')}
+                ${p.extra>0?`<div class="avatar-extra">+${p.extra}</div>`:''}
+              </div>
+              <div style="font-size:.73rem;color:var(--text-2);">Due: ${p.deadline}</div>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>
+  `;
+}
+
+/* ════════════════════════════════════════
+   TASKS PAGE
+════════════════════════════════════════ */
+function renderTasks(filter='', status='all') {
+  setTopbarTitle('Tasks');
+  let list = DB.tasks.filter(t =>
+    (status==='all' || t.status===status) &&
+    (t.title.toLowerCase().includes(filter.toLowerCase()) || t.project.toLowerCase().includes(filter.toLowerCase()))
+  );
+  const statusCounts = { all: DB.tasks.length, completed: DB.tasks.filter(t=>t.status==='completed').length, 'in-progress': DB.tasks.filter(t=>t.status==='in-progress').length, pending: DB.tasks.filter(t=>t.status==='pending').length };
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Tasks <span style="font-size:1rem;color:var(--text-2);font-weight:500">(${list.length})</span></div>
+        <div class="page-subtitle">Manage and track all project tasks.</div>
+      </div>
+      <button class="btn btn-primary" onclick="showToast('New task added')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Task
+      </button>
+    </div>
+    <div class="tab-bar">
+      ${[['all','All'],['pending','Pending'],['in-progress','In Progress'],['completed','Done']].map(([v,l])=>`
+        <button class="tab-btn ${status===v?'active':''}" onclick="renderTasks('',  '${v}')">${l} <span style="opacity:.6;font-size:.7rem">(${statusCounts[v]||0})</span></button>`).join('')}
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="table-actions">
+          <div class="search-inline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search tasks…" value="${filter}" oninput="renderTasks(this.value,'${status}')" />
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Task</th><th>Project</th><th>Assignee</th><th>Priority</th><th>Status</th><th>Due</th><th>Action</th></tr></thead>
+            <tbody>
+              ${list.length ? list.map(t=>{
+                const emp = DB.employees.find(e=>e.initials===t.assignee);
+                return `<tr>
+                  <td><strong style="font-size:.82rem;">${t.title}</strong></td>
+                  <td style="color:var(--text-2)">${t.project}</td>
+                  <td><div class="emp-cell" style="gap:7px;">${emp?gradientAvatar(emp.initials,emp.gradient,26,'.63rem'):t.assignee}<span>${emp?.name||t.assignee}</span></div></td>
+                  <td>${priorityBadge(t.priority)}</td>
+                  <td>${statusBadge(t.status)}</td>
+                  <td style="color:var(--text-2);font-size:.78rem;">${t.due}</td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="toggleTaskStatus(${t.id})">${t.status==='completed'?'Reopen':'Complete'}</button></td>
+                </tr>`;
+              }).join('')
+              : `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text-3)">No tasks found.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleTaskStatus(id) {
+  const task = DB.tasks.find(t => t.id === id);
+  if (!task) return;
+  task.status = task.status === 'completed' ? 'pending' : 'completed';
+  document.getElementById('badgeTasks').textContent = DB.tasks.filter(t=>t.status!=='completed').length;
+  showToast(`Task marked as ${task.status}`, 'success');
+  renderTasks();
+}
+
+/* ════════════════════════════════════════
+   ATTENDANCE PAGE
+════════════════════════════════════════ */
+function renderAttendance() {
+  setTopbarTitle('Attendance');
+  const summary = { 'on-time': 0, late: 0, absent: 0, leave: 0 };
+  DB.attendance.forEach(a => summary[a.status] = (summary[a.status]||0)+1);
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Attendance</div>
+        <div class="page-subtitle">Today's attendance overview — ${new Date().toLocaleDateString('en-IN',{dateStyle:'full'})}</div>
+      </div>
+      <button class="btn btn-ghost" onclick="showToast('Attendance report exported')">Export</button>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+      ${[['Present',summary['on-time'],'indigo','var(--primary)'],['Late',summary['late'],'amber','var(--warning)'],['Absent',summary['absent'],'red','var(--danger)'],['On Leave',summary['leave'],'sky','var(--sky)']].map(([label,val,cls,color])=>`
+        <div class="kpi-card ${cls}">
+          <div class="kpi-top"><div class="kpi-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div></div>
+          <div class="kpi-value" style="color:${color}">${val}</div>
+          <div class="kpi-label">${label}</div>
+        </div>`).join('')}
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Attendance Log</div></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead>
+            <tbody>
+              ${DB.attendance.map(a=>`
+                <tr>
+                  <td><div class="emp-cell">${gradientAvatar(a.initials,a.gradient)}<div><div class="emp-name">${a.name}</div></div></div></td>
+                  <td style="font-weight:500">${a.checkIn}</td>
+                  <td style="font-weight:500">${a.checkOut}</td>
+                  <td><strong>${a.hours?a.hours.toFixed(1)+' hrs':'—'}</strong></td>
+                  <td>${timeBadge(a.status)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ════════════════════════════════════════
+   TIME LOGS PAGE
+════════════════════════════════════════ */
+function renderTimeLogs() {
+  setTopbarTitle('Time Logs');
+  const totalHrs = DB.timeLogs.reduce((s,t)=>s+t.hours,0);
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div><div class="page-title">Time Logs</div><div class="page-subtitle">Track hours logged per project and employee.</div></div>
+      <button class="btn btn-primary" onclick="showToast('Time log added')">+ Log Time</button>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="kpi-card indigo"><div class="kpi-top"><div class="kpi-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="kpi-value">${totalHrs.toFixed(1)}</div><div class="kpi-label">Total Hours Today</div></div>
+      <div class="kpi-card green"><div class="kpi-top"><div class="kpi-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div><div class="kpi-value">${DB.timeLogs.length}</div><div class="kpi-label">Entries Today</div></div>
+      <div class="kpi-card sky"><div class="kpi-top"><div class="kpi-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div></div><div class="kpi-value">${new Set(DB.timeLogs.map(t=>t.project)).size}</div><div class="kpi-label">Active Projects</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Time Log Entries</div></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Project</th><th>Task</th><th>Hours</th><th>Date</th></tr></thead>
+            <tbody>
+              ${DB.timeLogs.map(t=>`
+                <tr>
+                  <td><div class="emp-cell">${gradientAvatar(t.initials,t.gradient)}<span class="emp-name">${t.name}</span></div></td>
+                  <td>${t.project}</td>
+                  <td style="color:var(--text-2)">${t.task}</td>
+                  <td><strong style="color:var(--primary)">${t.hours}h</strong></td>
+                  <td style="color:var(--text-2)">${t.date}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ════════════════════════════════════════
+   ANALYTICS PAGE
+════════════════════════════════════════ */
+function renderAnalytics() {
+  setTopbarTitle('Reports & Analytics');
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div><div class="page-title">Reports & Analytics</div><div class="page-subtitle">Data insights across all departments.</div></div>
+      <button class="btn btn-ghost" onclick="showToast('Generating report PDF…')">Export PDF</button>
+    </div>
+    <div class="analytics-grid">
+      ${[
+        { label:'Total Hours Logged', val:'2,348', chg:'+12%', dir:'up', color:'var(--primary)' },
+        { label:'Avg Performance',    val:'87.2',  chg:'+3.4%', dir:'up', color:'var(--success)' },
+        { label:'Tasks Completed',    val:'342',   chg:'+18%', dir:'up', color:'var(--sky)' },
+        { label:'On-Time Delivery',   val:'91%',   chg:'-2%',  dir:'down',color:'var(--warning)' },
+      ].map(s=>`
+        <div class="stat-block">
+          <div class="stat-block-val" style="color:${s.color}">${s.val}</div>
+          <div class="stat-block-lbl">${s.label}</div>
+          <div class="stat-block-chg ${s.dir}">${s.chg} vs last month</div>
+        </div>`).join('')}
+    </div>
+    <div class="charts-row" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Year-over-Year Performance</div><div class="card-subtitle">2024 vs 2025 monthly scores</div></div>
+        </div>
+        <div class="card-body"><div class="chart-wrap" style="height:240px;"><canvas id="areaChart"></canvas></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">Department Breakdown</div><div class="card-subtitle">Completed tasks per dept</div></div></div>
+        <div class="card-body">
+          <div class="progress-bar-wrap">
+            ${[['Engineering',78,'var(--primary)'],['Design',92,'var(--sky)'],['QA',65,'var(--warning)'],['DevOps',80,'var(--success)'],['Product',88,'var(--danger)']].map(([n,v,c])=>`
+              <div class="progress-item">
+                <div class="progress-label"><span class="progress-name">${n}</span><span class="progress-pct" style="color:${c}">${v}%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:${v}%;background:${c}"></div></div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  requestAnimationFrame(() => ChartsManager.initAreaChart('areaChart'));
+}
+
+/* ════════════════════════════════════════
+   PERFORMANCE PAGE
+════════════════════════════════════════ */
+function renderPerformance() {
+  setTopbarTitle('Performance');
+  const top = [...DB.employees].sort((a,b)=>b.score-a.score).slice(0,5);
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div><div class="page-title">Performance</div><div class="page-subtitle">Individual and team performance metrics.</div></div>
+    </div>
+    <div class="charts-row" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">Team Radar</div><div class="card-subtitle">Department performance scores</div></div></div>
+        <div class="card-body"><div class="chart-wrap" style="height:280px;"><canvas id="radarChart"></canvas></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div><div class="card-title">Top Performers</div><div class="card-subtitle">This month's leaderboard</div></div></div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            ${top.map((e,i)=>`
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="width:22px;font-size:.78rem;font-weight:700;color:${i<3?'var(--warning)':'var(--text-3)'};text-align:center;">#${i+1}</div>
+                ${gradientAvatar(e.initials,e.gradient,34,'.78rem')}
+                <div style="flex:1;"><div style="font-weight:600;font-size:.83rem;">${e.name}</div><div style="font-size:.73rem;color:var(--text-2)">${e.dept}</div></div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--primary)">${e.score}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">All Employee Scores</div></div>
+      <div class="card-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Employee</th><th>Dept</th><th>Score</th><th>Score Bar</th><th>Status</th></tr></thead>
+            <tbody>
+              ${[...DB.employees].sort((a,b)=>b.score-a.score).map(e=>`
+                <tr>
+                  <td><div class="emp-cell">${gradientAvatar(e.initials,e.gradient)}<span class="emp-name">${e.name}</span></div></td>
+                  <td>${e.dept}</td>
+                  <td><strong style="color:${e.score>=85?'var(--success)':e.score>=70?'var(--warning)':'var(--danger)'}">${e.score}</strong></td>
+                  <td><div style="width:120px;background:var(--bg);border-radius:99px;height:6px;overflow:hidden;"><div style="width:${e.score}%;height:100%;border-radius:99px;background:${e.score>=85?'var(--success)':e.score>=70?'var(--warning)':'var(--danger)'}"></div></div></td>
+                  <td>${statusBadge(e.status)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+  requestAnimationFrame(() => ChartsManager.initRadarChart('radarChart'));
+}
+
+/* ════════════════════════════════════════
+   SETTINGS PAGE
+════════════════════════════════════════ */
+function renderSettings(section='profile') {
+  setTopbarTitle('Settings');
+  const sections = [
+    { key:'profile',  label:'Profile',       svg:`<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>` },
+    { key:'security', label:'Security',      svg:`<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>` },
+    { key:'notifications', label:'Notifications', svg:`<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>` },
+    { key:'appearance', label:'Appearance',  svg:`<circle cx="12" cy="12" r="3"/><path d="M20.71 16.95A9 9 0 1 0 7.05 3.29"/>` },
+    { key:'system', label:'System',          svg:`<circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>` },
+  ];
+
+  const panels = {
+    profile: `
+      <div class="settings-section-title">Profile Settings</div>
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" value="Sangeetha G." /></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" value="admin@codeaxis.io" /></div>
+      <div class="form-group"><label class="form-label">Role</label><input class="form-input" value="Admin" readonly style="opacity:.6" /></div>
+      <div class="form-group"><label class="form-label">Department</label><select class="form-input"><option>Engineering</option><option>Product</option><option>Design</option></select></div>
+      <button class="btn btn-primary" style="margin-top:6px;" onclick="showToast('Profile saved ✓','success')">Save Changes</button>`,
+    security: `
+      <div class="settings-section-title">Security</div>
+      <div class="form-group"><label class="form-label">Current Password</label><input class="form-input" type="password" placeholder="••••••••" /></div>
+      <div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" placeholder="••••••••" /></div>
+      <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" type="password" placeholder="••••••••" /></div>
+      <div class="settings-row"><div><div class="settings-row-label">Two-Factor Authentication</div><div class="settings-row-desc">Secure your account with 2FA</div></div><label class="toggle-switch"><input type="checkbox" onchange="showToast(this.checked?'2FA enabled':'2FA disabled')"><span class="toggle-slider"></span></label></div>
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="showToast('Password updated ✓','success')">Update Password</button>`,
+    notifications: `
+      <div class="settings-section-title">Notification Preferences</div>
+      ${[['Email Notifications','Receive updates via email',true],['Task Reminders','Get reminded before deadlines',true],['Team Activity','Updates from your team',false],['System Alerts','Critical system notifications',true],['Weekly Summary','Get a weekly digest',false]].map(([l,d,c])=>`
+        <div class="settings-row">
+          <div><div class="settings-row-label">${l}</div><div class="settings-row-desc">${d}</div></div>
+          <label class="toggle-switch"><input type="checkbox" ${c?'checked':''} onchange="showToast('Preference saved')"><span class="toggle-slider"></span></label>
+        </div>`).join('')}`,
+    appearance: `
+      <div class="settings-section-title">Appearance</div>
+      <div class="settings-row">
+        <div><div class="settings-row-label">Dark Mode</div><div class="settings-row-desc">Switch between light and dark theme</div></div>
+        <label class="toggle-switch"><input type="checkbox" id="themeToggleSettings" ${ThemeManager.getTheme()==='dark'?'checked':''} onchange="toggleTheme()"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="settings-row">
+        <div><div class="settings-row-label">Compact Sidebar</div><div class="settings-row-desc">Collapse sidebar by default</div></div>
+        <label class="toggle-switch"><input type="checkbox" onchange="showToast('Preference saved')"><span class="toggle-slider"></span></label>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="settings-row-label" style="margin-bottom:10px;">Accent Color</div>
+        <div style="display:flex;gap:10px;">
+          ${['#4F46E5','#0EA5E9','#22C55E','#F59E0B','#EF4444','#8B5CF6'].map(c=>`<div onclick="showToast('Theme color applied')" style="width:28px;height:28px;border-radius:50%;background:${c};cursor:pointer;border:2px solid transparent;transition:.2s" onmouseenter="this.style.transform='scale(1.15)'" onmouseleave="this.style.transform=''"></div>`).join('')}
+        </div>
+      </div>`,
+    system: `
+      <div class="settings-section-title">System Settings</div>
+      ${[['Maintenance Mode','Temporarily disable the dashboard for maintenance',false],['Debug Logs','Enable detailed logging for support',false],['Auto Backup','Automatically backup data daily',true],['Analytics Tracking','Allow usage analytics collection',true]].map(([l,d,c])=>`
+        <div class="settings-row">
+          <div><div class="settings-row-label">${l}</div><div class="settings-row-desc">${d}</div></div>
+          <label class="toggle-switch"><input type="checkbox" ${c?'checked':''} onchange="showToast('Setting updated')"><span class="toggle-slider"></span></label>
+        </div>`).join('')}
+      <div style="margin-top:16px;padding:14px;background:var(--danger-dim);border-radius:var(--radius-sm);border:1px solid rgba(239,68,68,.2);">
+        <div style="font-size:.83rem;font-weight:600;color:var(--danger);margin-bottom:6px;">Danger Zone</div>
+        <div style="font-size:.78rem;color:var(--text-2);margin-bottom:10px;">These actions are irreversible. Proceed with caution.</div>
+        <button class="btn btn-danger btn-sm" onclick="showToast('Action requires confirmation','warning')">Clear All Data</button>
+      </div>`,
+  };
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="page-header">
+      <div><div class="page-title">Settings</div><div class="page-subtitle">Manage your account and system preferences.</div></div>
+    </div>
+    <div class="settings-grid">
+      <div class="card" style="padding:12px;">
+        <div class="settings-nav">
+          ${sections.map(s=>`
+            <div class="settings-nav-item ${section===s.key?'active':''}" onclick="renderSettings('${s.key}')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${s.svg}</svg>
+              ${s.label}
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="settings-panel">${panels[section]||panels.profile}</div>
+    </div>
+  `;
+}
+// ======================================
+// Code Axis - app.js
+// Main App Initializer
+// ======================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeApp();
+});
+
+// ======================================
+// INITIALIZE APPLICATION
+// ======================================
+
+function initializeApp() {
+  // Init theme first so colours are correct before rendering
+  ThemeManager.init();
+  ChartsManager.applyDefaults();
+
+  initDate();
+  renderNotifications();
+
+  // Load default dashboard page
+  loadPage('dashboard');
+
+  console.log("Code Axis Dashboard Initialized");
+}
+
+// ======================================
+// PAGE ROUTER
+// ======================================
+
+window.currentPage = 'dashboard';
+
+function loadPage(page) {
+  window.currentPage = page;
+  const map = {
+    dashboard:   () => renderDashboard(),
+    employees:   () => renderEmployees(),
+    projects:    () => renderProjects(),
+    tasks:       () => renderTasks(),
+    attendance:  () => renderAttendance(),
+    timelogs:    () => renderTimeLogs(),
+    analytics:   () => renderAnalytics(),
+    performance: () => renderPerformance(),
+    settings:    () => renderSettings(),
+  };
+  const fn = map[page];
+  if (fn) fn();
+}
+
+function navigateTo(page) {
+  loadPage(page);
+}
+
+
+</script>
+</body>
+</html>
