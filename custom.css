@@ -1,0 +1,16 @@
+.kpi-link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.kpi-link .small-box {
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.kpi-link .small-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
