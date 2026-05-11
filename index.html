@@ -60,7 +60,7 @@
 
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="adminlte.css" />
-    <link rel="stylesheet" href="custom.css"/>
+    <link rel="stylesheet" href="custom.css">
     <!--end::Required Plugin(AdminLTE)-->
 
     <!-- apexcharts -->
@@ -99,9 +99,15 @@
             
              <!-- 🔍 Search (NEXT TO SIDEBAR TOGGLER) -->
   <li class="nav-item d-none d-md-block">
-    <form class="d-flex ms-2">
+    <form class="d-flex ms-2" id="dashboardSearchForm">
       <div class="input-group input-group-sm">
-        <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+        <input
+  class="form-control"
+  type="search"
+  placeholder="Search menu..."
+  aria-label="Search"
+  id="dashboardSearch"
+/>
         <button class="btn btn-primary" type="submit">
           <i class="bi bi-search"></i>
         </button>
@@ -133,17 +139,17 @@
                 <span class="dropdown-item dropdown-header">5 Notifications</span>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                  <i class="bi bi-envelope me-2"></i> 4 new messages
+                  <i class="bi bi-envelope me-2"></i> 4 new projects
                   <span class="float-end text-secondary fs-7">3 mins</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                  <i class="bi bi-people-fill me-2"></i> 8 friend requests
+                  <i class="bi bi-people-fill me-2"></i> 8 pending tasks
                   <span class="float-end text-secondary fs-7">12 hours</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
-                  <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
+                  <i class="bi bi-file-earmark-fill me-2"></i> 3 completed tasks
                   <span class="float-end text-secondary fs-7">2 days</span>
                 </a>
                 <div class="dropdown-divider"></div>
@@ -180,27 +186,12 @@
                   alt="User Image"
                   />
                   <p>
-                    Admin User- Web Developer
-                    <small>Member since Nov. 2023</small>
+                    Admin User
                   </p>
                 </li>
                 <!--end::User Image-->
                 <!--begin::Menu Body-->
-                <li class="user-body">
-                  <!--begin::Row-->
-                  <div class="row">
-                    <div class="col-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!--end::Row-->
-                </li>
+               
                 <!--end::Menu Body-->
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
@@ -226,7 +217,7 @@
           <a href="./index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="AdminLTELogo.png"
+              src="./assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -242,81 +233,134 @@
         <div class="sidebar-wrapper">
           <nav class="mt-2">
             <!--begin::Sidebar Menu-->
-            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview">
 
-<li class="nav-item">
-<a href="#" class="nav-link active">
-<i class="nav-icon bi bi-speedometer2"></i>
-<p>Dashboard</p>
-</a>
-</li>
+            <ul
+  class="nav sidebar-menu flex-column"
+  data-lte-toggle="treeview"
+  role="menu"
+  data-accordion="false"
+>
 
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="nav-icon bi bi-people"></i>
-<p>Employees</p>
-</a>
-</li>
+  <!-- DASHBOARD -->
+  <li class="nav-item">
+    <a href="#" class="nav-link active">
+      <i class="nav-icon bi bi-speedometer2"></i>
+      <p>Dashboard</p>
+    </a>
+  </li>
 
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="nav-icon bi bi-calendar-check"></i>
-<p>Attendance</p>
-</a>
-</li>
+  <!-- EMPLOYEE MANAGEMENT -->
+  <li class="nav-header">EMPLOYEE MANAGEMENT</li>
 
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="nav-icon bi bi-kanban"></i>
-<p>Projects</p>
-</a>
-</li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-people"></i>
+      <p>Employees</p>
+    </a>
+  </li>
 
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="nav-icon bi bi-list-task"></i>
-<p>Tasks</p>
-</a>
-</li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-calendar-check"></i>
+      <p>Attendance</p>
+    </a>
+  </li>
 
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="nav-icon bi bi-bar-chart"></i>
-<p>Reports</p>
-</a>
-</li>
-<li class="nav-item">
-  <a href="#" class="nav-link">
-    <i class="nav-icon bi bi-gear"></i>
-    <p>
-      Settings
-      <i class="right bi bi-chevron-down"></i>
-    </p>
-  </a>
+  <!-- PROJECT MANAGEMENT -->
+  <li class="nav-header">PROJECT MANAGEMENT</li>
 
-  <ul class="nav nav-treeview">
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="bi bi-info-circle nav-icon"></i>
-        <p>About Dashboard</p>
-      </a>
-    </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-kanban"></i>
+      <p>Projects</p>
+    </a>
+  </li>
 
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="bi bi-sliders nav-icon"></i>
-        <p>General Settings</p>
-      </a>
-    </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-list-task"></i>
+      <p>
+        Tasks
+        <span class="nav-badge badge text-bg-danger">8</span>
+      </p>
+    </a>
+  </li>
 
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="bi bi-shield-lock nav-icon"></i>
-        <p>Privacy</p>
-      </a>
-    </li>
-  </ul>
-</li>
+  <!-- REPORTS -->
+  <li class="nav-header">ANALYTICS</li>
+
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-bar-chart"></i>
+      <p>Reports & Analytics</p>
+    </a>
+  </li>
+
+  <!-- NOTIFICATIONS -->
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-bell"></i>
+      <p>
+        Notifications
+        <span class="nav-badge badge text-bg-warning">5</span>
+      </p>
+    </a>
+  </li>
+
+  <!-- USER -->
+  <li class="nav-header">ACCOUNT</li>
+
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-person-circle"></i>
+      <p>Profile</p>
+    </a>
+  </li>
+
+  <!-- SETTINGS -->
+  <li class="nav-item">
+    <a href="#" class="nav-link">
+      <i class="nav-icon bi bi-gear"></i>
+      <p>
+        Settings
+        <i class="right bi bi-chevron-down"></i>
+      </p>
+    </a>
+
+    <ul class="nav nav-treeview">
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon bi bi-sliders"></i>
+          <p>General Settings</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon bi bi-shield-lock"></i>
+          <p>Privacy</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon bi bi-info-circle"></i>
+          <p>About Dashboard</p>
+        </a>
+      </li>
+
+    </ul>
+  </li>
+
+  <!-- LOGOUT -->
+  <li class="nav-item mt-3">
+    <a href="#" class="nav-link text-danger">
+      <i class="nav-icon bi bi-box-arrow-right"></i>
+      <p>Logout</p>
+    </a>
+  </li>
+
 </ul>
             <!--end::Sidebar Menu-->
           </nav>
@@ -354,7 +398,7 @@
             <!--begin::Row-->
             <div class="row">
               <!--begin::Col-->
-              <div class="col-lg-3 col-6">
+                <div class="col-12 col-sm-6 col-lg-3">
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                   <div class="inner">
@@ -380,7 +424,7 @@
                 <!--end::Small Box Widget 1-->
               </div>
               <!--end::Col-->
-              <div class="col-lg-3 col-6">
+                <div class="col-12 col-sm-6 col-lg-3">
                 <!--begin::Small Box Widget 2-->
                 <div class="small-box text-bg-success">
                   <div class="inner">
@@ -406,7 +450,7 @@
                 <!--end::Small Box Widget 2-->
               </div>
               <!--end::Col-->
-              <div class="col-lg-3 col-6">
+                <div class="col-12 col-sm-6 col-lg-3">
                 <!--begin::Small Box Widget 3-->
                 <div class="small-box text-bg-warning">
                   <div class="inner">
@@ -432,7 +476,7 @@
                 <!--end::Small Box Widget 3-->
               </div>
               <!--end::Col-->
-              <div class="col-lg-3 col-6">
+                <div class="col-12 col-sm-6 col-lg-3">
                 <!--begin::Small Box Widget 4-->
                 <div class="small-box text-bg-danger">
                   <div class="inner">
@@ -468,22 +512,25 @@
             </div>
             <!--end::Row-->
             <!--begin::Row-->
+<!-- ================= LINE CHART (FULL WIDTH) ================= -->
 <div class="row">
-
-  <!-- Line/Area Chart -->
-  <div class="col-lg-6 connectedSortable">
+  <div class="col-12">
     <div class="card mb-4">
       <div class="card-header">
-        <h3 class="card-title">Employee Performance</h3>
+        <h3 class="card-title">Employee Performance (Line Chart)</h3>
       </div>
       <div class="card-body">
         <div id="revenue-chart"></div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- ================= BAR + PIE SIDE BY SIDE ================= -->
+<div class="row">
 
   <!-- BAR CHART -->
-  <div class="col-lg-6 connectedSortable">
+  <div class="col-12 col-lg-6">
     <div class="card mb-4">
       <div class="card-header">
         <h3 class="card-title">Project Analytics (Bar Chart)</h3>
@@ -494,15 +541,8 @@
     </div>
   </div>
 
-</div>
-<!-- PIE + SUMMARY -->
-<div class="row">
-
- <!-- PIE + PERFORMANCE INDICATOR -->
-<div class="row">
-
   <!-- PIE CHART -->
-  <div class="col-lg-6 connectedSortable">
+  <div class="col-12 col-lg-6">
     <div class="card mb-4">
       <div class="card-header">
         <h3 class="card-title">Task Distribution (Pie Chart)</h3>
@@ -513,8 +553,13 @@
     </div>
   </div>
 
+</div>
   <!-- PERFORMANCE INDICATOR -->
-  <div class="col-lg-6 connectedSortable">
+   <!-- PERFORMANCE + ACTIVITY SIDE BY SIDE -->
+<div class="row">
+
+  <!-- PERFORMANCE INDICATOR -->
+  <div class="col-12 col-lg-6">
     <div class="card mb-4">
       <div class="card-header">
         <h3 class="card-title">Performance Indicator</h3>
@@ -522,7 +567,6 @@
 
       <div class="card-body">
 
-        <!-- Progress 1 -->
         <div class="mb-3">
           <div class="d-flex justify-content-between">
             <span>Employee Performance</span>
@@ -533,7 +577,6 @@
           </div>
         </div>
 
-        <!-- Progress 2 -->
         <div class="mb-3">
           <div class="d-flex justify-content-between">
             <span>Project Delivery</span>
@@ -544,7 +587,6 @@
           </div>
         </div>
 
-        <!-- Progress 3 -->
         <div class="mb-3">
           <div class="d-flex justify-content-between">
             <span>Task Completion</span>
@@ -555,7 +597,6 @@
           </div>
         </div>
 
-        <!-- Progress 4 -->
         <div class="mb-3">
           <div class="d-flex justify-content-between">
             <span>Attendance</span>
@@ -570,12 +611,9 @@
     </div>
   </div>
 
-</div>
-
-<!-- ACTIVITY FEED FULL WIDTH -->
-<div class="row">
-  <div class="col-12">
-    <div class="card">
+  <!-- ACTIVITY FEED -->
+  <div class="col-12 col-lg-6">
+    <div class="card mb-4">
       <div class="card-header">
         <h3 class="card-title">Recent Activity</h3>
       </div>
@@ -591,6 +629,7 @@
       </div>
     </div>
   </div>
+
 </div>
 <!-- ANALYTICS GRID END -->
                 
@@ -770,7 +809,7 @@
         legend: {
           show: false,
         },
-        colors: ['#0d6efd', '#20c997'],
+        colors: ['#4F46E5', '#22C55E'],
         dataLabels: {
           enabled: false,
         },
@@ -832,7 +871,53 @@ new ApexCharts(document.querySelector("#pie-chart"), pieOptions).render();
     </script>
 
     <!--end::Script-->
-    
+
+<script>
+const searchInput = document.getElementById("dashboardSearch");
+
+searchInput.addEventListener("keyup", function() {
+
+    const value = this.value.toLowerCase();
+    document.querySelectorAll(".sidebar-menu > .nav-item").forEach(item => {
+
+        const text = item.innerText.toLowerCase();
+
+        if(text.includes(value)){
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+
+    });
+
+});
+</script>    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // LOAD SAVED SIDEBAR STATE
+  if (localStorage.getItem("sidebar-collapse") === "true") {
+    document.body.classList.add("sidebar-collapse");
+  }
+
+  // SAVE SIDEBAR STATE
+  const sidebarBtn = document.querySelector('[data-lte-toggle="sidebar"]');
+
+  sidebarBtn.addEventListener("click", function () {
+
+    setTimeout(() => {
+
+      const collapsed =
+        document.body.classList.contains("sidebar-collapse");
+
+      localStorage.setItem("sidebar-collapse", collapsed);
+
+    }, 200);
+
+  });
+
+});
+</script>
   </body>
   <!--end::Body-->
 </html>
